@@ -18,6 +18,7 @@ export default class AuthService {
       const userInfo: UserinfoResponse = await kcC.userinfo(tokenSet);
       const decodedToken: any = jwt.decode(String(tokenSet.access_token));
       const { groups, resource_access } = decodedToken;
+      console.log("group::::", decodedToken)
 
       return {
         status: true,

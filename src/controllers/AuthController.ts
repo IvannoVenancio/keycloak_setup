@@ -14,7 +14,7 @@ async login(req: Request, res: Response) {
 
       return res.status(200).json({
         response: { statusCode: res.statusCode, message: 'Success' },
-        data: result.data,
+        data: result.data ,
       });
     } catch (err: any) {
      

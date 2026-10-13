@@ -1,18 +1,6 @@
-version: '3.8'
+#version: '3.8'
 
 services:
-
-  app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: node-app
-    ports: 
-      - 3000:3000
-    volumes:
-      - ./:/home/app/
-    networks:
-      - app-network
 
   postgres:
     image: postgres:16
@@ -35,9 +23,10 @@ services:
       DB_ADDR: postgres
       DB_PASSWORD: keycloak
       #KEYCLOAK_FRONTEND_URL: ${KEYCLOAK_FRONTEND_URL}
+      KC_HTTP_ENABLED: "true"
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: 4321
-      PROXY_ADDRESS_FORWARDING: "true"
+      #PROXY_ADDRESS_FORWARDING: "true"
       CACHE_OWNERS_COUNT: 3
       CACHE_OWNERS_AUTH_SESSIONS_COUNT: 3
       JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
@@ -48,11 +37,14 @@ services:
       - 8080:8080
     networks:
       - app-network
+      - auth_network
 
 
 networks:
   app-network:
     driver: bridge
+  auth_network:
+    external: true
 
 volumes:
   auth_volume_db: {}

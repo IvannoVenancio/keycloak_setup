@@ -9,9 +9,6 @@ const kcClient = async () => {
   const keycloakIssuer = await Issuer.discover(
     `${process.env.KEYCLOAK_BASE_URL_CLIENT}`,
   );
-
-  console.log("process.env.CLIENT_ID:::",process.env.KEYCLOAK_CLIENT_ID)
-  console.log("process.env.CLIENT_SECRET:::",process.env.KEYCLOAK_CLIENT_SECRET)
   return new keycloakIssuer.Client({
     client_id: `${process.env.KEYCLOAK_CLIENT_ID}`,
     client_secret: `${process.env.KEYCLOAK_CLIENT_SECRET}`,
